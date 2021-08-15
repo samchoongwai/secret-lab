@@ -46,20 +46,16 @@
                 }
                 sleep(2);
             }
-            // }
+            
 
             /* End Point: /object/get_all_records */
 
-            // public function test_list()
-            // {
             $response = $this->getJson('/object/get_all_records');
             $response->assertStatus(200);
-            // }
-
+            
             /* End Point: /object/{key} */
 
-            // public function test_find()
-            //{
+           
             /*
               Retrieve all objects, and get the "latest" object (of each key)
              */
@@ -82,24 +78,22 @@
                 $response = $this->getJson('/object/' . $key);
                 $response->assertStatus(200)->assertJson($data);
             }
-            // }
+            
 
             /* End Point: /object/{key} */
 
-            //public function test_find_negative()
-            //{
+            
             /* randomly add a number after each item name, to test negative case = 404 */
             foreach ($this->objectKeys as $key)
             {
                 $response = $this->getJson('/object/' . $key . rand());
                 $response->assertStatus(404);
             }
-            //}
+            
 
             /* End Point: /object/{key}?timestamp={timestamp} */
 
-            //public function test_find_by_timestamp()
-            //{
+            
             /*
               Retrieve all objects, and retrieve each object by key + timestamp to assert the value returned is correct (base on the timestamp)
              */
@@ -118,12 +112,11 @@
                         ->assertJson($data);
                 ;
             }
-            //}
+            
 
             /* End Point: /object/{key}?timestamp={timestamp} */
 
-            //public function test_find_by_timestamp_negative()
-            //{
+            
             /*
               Retrieve all objects, and retrieve each object by key + timestamp (modified) to assert no value is returned due to invalid timestamp
              */
