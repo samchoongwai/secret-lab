@@ -29,7 +29,9 @@
             catch (\Exception $e)
             {
                 /* Exceptions handling: database exception */
-                $data = [];
+                $data = [
+                    'message' => $e->getMessage()
+                ];
                 $returnCode = 500;
             }
             return response()->json($data, $returnCode);
@@ -71,7 +73,9 @@
             catch (\Exception $e)
             {
                 /* Exceptions handling: database exception */
-                $data = [];
+                $data = [
+                    'message' => $e->getMessage()
+                ];
                 $returnCode = 500;
             }
             return response()->json($data, $returnCode);
