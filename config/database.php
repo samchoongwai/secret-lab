@@ -9,6 +9,13 @@
     $username = isset($_SERVER['RDS_USERNAME']) ? $_SERVER['RDS_USERNAME'] : env('DB_USERNAME', env('RDS_USERNAME', 'forge'));
     $password = isset($_SERVER['RDS_PASSWORD']) ? $_SERVER['RDS_PASSWORD'] : env('DB_PASSWORD', env('RDS_PASSWORD', ''));
 
+    $dbhost = isset($_SERVER['RDS_HOSTNAME']) ? $_SERVER['RDS_HOSTNAME'] : env('RDS_HOSTNAME', env('DB_HOST', '127.0.0.1'));
+    $dbport = isset($_SERVER['RDS_PORT']) ? $_SERVER['RDS_PORT'] : env('RDS_PORT', env('RDS_PORT', '3306'));
+    $dbname = isset($_SERVER['RDS_DB_NAME']) ? $_SERVER['RDS_DB_NAME'] : env('RDS_DB_NAME', env('DB_DATABASE', 'forge'));
+    $username = isset($_SERVER['RDS_USERNAME']) ? $_SERVER['RDS_USERNAME'] : env('RDS_USERNAME', env('DB_USERNAME', 'forge'));
+    $password = isset($_SERVER['RDS_PASSWORD']) ? $_SERVER['RDS_PASSWORD'] : env('RDS_PASSWORD', env('DB_PASSWORD', ''));
+    
+
     return [
         /*
           |--------------------------------------------------------------------------
