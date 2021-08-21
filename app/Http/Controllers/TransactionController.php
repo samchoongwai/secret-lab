@@ -60,14 +60,19 @@
                 }
 
                 $returnCode = 200;
-                $data = $query->latest()
+                $record = $query->latest()
                         ->first();
 
                 /* Exceptions handling: record not found */
-                if (!$data)
+                if (!$record)
                 {
                     $data = [];
                     $returnCode = 404;
+                }
+                else
+                {
+                    $data = [];
+                    $data[$record['key']] = $record['value'];
                 }
             }
             catch (\Exception $e)
@@ -115,15 +120,33 @@
                  */
                 $returnCode = 200;
 
-                $json = $request->json();
-                $key = $json->get('key');
-                $value = $json->get('value');
-
+                $json = $request->json()->all();
+                /* default return data = invalid format */
                 $data = [
-                    'key' => $key,
-                    'value' => $value
+                    'message' => 'Invalid data format'
                 ];
-                Transaction::create($data);
+                $returnCode = 400;  /* bad request */
+
+                /* check if the JSON is { key: value } */
+                if(count($json) == 1)
+                {
+                    reset($json);
+                    $key = key($json);
+                    $value = $json[$key];
+
+                    $dataRecord = [
+                        'key' => $key,
+                        'value' => $value
+                    ];
+                    Transaction::create($dataRecord);
+                    $data = [
+                        $key => $value
+                    ];
+                    $returnCode = 200;
+                }
+
+
+
             }
             catch (\Exception $e)
             {
